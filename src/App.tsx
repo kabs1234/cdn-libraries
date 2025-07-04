@@ -1,11 +1,19 @@
 import { Route, Routes } from 'react-router';
-import Index from './pages';
+import Libraries from './pages/libraries';
+import LibraryInfo from './components/library-full-info';
+import ErrorPage from './pages/error';
+import IndexPage from './pages';
+import Layout from './components/layout';
 
 function App() {
   return (
     <Routes>
-      <Route index element={<Index />} />
-      <Route path={':library'} element={<Index />} />
+      <Route path="/" element={<Layout />}>
+        <Route index element={<IndexPage />} />
+        <Route path="/libraries" element={<Libraries />} />
+        <Route path={'/libraries/:libraryName'} element={<LibraryInfo />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Route>
     </Routes>
   );
 }

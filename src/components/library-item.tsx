@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { Library } from '../types/types';
+import { Link } from 'react-router';
 
 export default function LibaryItem({
   library,
@@ -7,11 +8,11 @@ export default function LibaryItem({
   library: Library;
 }): ReactElement {
   return (
-    <a
+    <Link
       className="bg-gray-100 w-full h-48 rounded-md text-5xl text-center"
-      href="#"
+      to={`/libraries/${library.name}`}
     >
       {library.name}
-    </a>
+    </Link>
   );
 }

@@ -9,7 +9,7 @@ export type Libraries = {
   available: number;
 };
 
-export type FullLibraryInfo = {
+export interface LibraryInfo {
   name: string;
   latest: string;
   sri: string;
@@ -23,25 +23,23 @@ export type FullLibraryInfo = {
   repository: Repository;
   version: string;
   author: string;
-  assets: Asset[];
-  versions: string[];
-};
+}
 
-export type Author = {
+export interface Author {
   name: string;
-};
+  email: string;
+}
 
-export type Autoupdate = {
+export interface Autoupdate {
   source: string;
   target: string;
   fileMap: FileMap[];
-  ignoreVersions: string[];
-};
+}
 
-export type FileMap = {
+export interface FileMap {
   basePath: string;
   files: string[];
-};
+}
 
 export type Repository = {
   type: string;
