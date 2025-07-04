@@ -1,0 +1,1 @@
+export const FIRST_SHOWN_LIBRARIES_COUNT = 6;
