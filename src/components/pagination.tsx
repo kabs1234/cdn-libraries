@@ -25,12 +25,6 @@ export default function Pagination(): ReactElement {
         3
       </li>
       <li className="flex items-center justify-center shrink-0 cursor-pointer text-base font-medium text-slate-900 px-[13px] h-9 rounded-md">
-        4
-      </li>
-      <li className="flex items-center justify-center shrink-0 cursor-pointer text-base font-medium text-slate-900 px-[13px] h-9 rounded-md">
-        5
-      </li>
-      <li className="flex items-center justify-center shrink-0 cursor-pointer text-base font-medium text-slate-900 px-[13px] h-9 rounded-md">
         ...
       </li>
       <li className="flex items-center justify-center shrink-0 cursor-pointer text-base font-medium text-slate-900 px-[13px] h-9 rounded-md">

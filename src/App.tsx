@@ -4,6 +4,7 @@ import LibraryInfo from './components/library-full-info';
 import ErrorPage from './pages/error';
 import IndexPage from './pages';
 import Layout from './components/layout';
+import SearchedLibraries from './pages/searched-libraries';
 
 function App() {
   return (
@@ -11,6 +12,10 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<IndexPage />} />
         <Route path="/libraries" element={<Libraries />} />
+        <Route
+          path="/libraries/search/:query"
+          element={<SearchedLibraries />}
+        />
         <Route path={'/libraries/:libraryName'} element={<LibraryInfo />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>

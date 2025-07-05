@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { useParams } from 'react-router';
 import type { LibraryInfo } from '../types/types';
-import { useQuery } from '@tanstack/react-query';
+import { useLibraryInfo } from '../hooks/hooks';
 
 type LibraryParams = {
   libraryName: string;
@@ -9,16 +9,7 @@ type LibraryParams = {
 
 export default function LibraryInfo(): ReactElement {
   const { libraryName } = useParams<LibraryParams>();
-
-  const fetchLibraryInfo = (): Promise<LibraryInfo> =>
-    fetch(
-      `https://api.cdnjs.com/libraries/${libraryName}?fields=name,latest,sri,authors,autoupdate,description,filename,homepage,keywords,license,repository,version,author`
-    ).then((response) => response.json());
-
-  const { isPending, error, data } = useQuery({
-    queryKey: ['libraryInfo'],
-    queryFn: fetchLibraryInfo,
-  });
+  const { isPending, error, data } = useLibraryInfo(libraryName as string);
 
   if (isPending) {
     return <p>Loading ...</p>;
