@@ -1,30 +1,64 @@
-import type { ReactElement } from 'react';
+import { useEffect, useRef, useState, type ReactElement } from 'react';
+import { NavLink, useLocation } from 'react-router';
 
 export default function Header(): ReactElement {
+  const [isNavMenuOpen, setIsNavMenuOpen] = useState<boolean>(false);
+  const navMenuRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+
+  const onMenuButtonClick = (): void => {
+    if (!navMenuRef.current) {
+      return;
+    }
+
+    const navMenuElement = navMenuRef.current;
+
+    if (isNavMenuOpen) {
+      navMenuElement.style.display = 'none';
+      setIsNavMenuOpen(false);
+    } else {
+      navMenuElement.style.display = 'block';
+      setIsNavMenuOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    if (!navMenuRef.current) {
+      return;
+    }
+
+    const navMenuElement = navMenuRef.current;
+
+    navMenuElement.style.display = 'none';
+    setIsNavMenuOpen(false);
+  }, [location]);
+
   return (
     <header className="flex border-b border-gray-300 py-3 px-4 sm:px-10 bg-white min-h-[65px] tracking-wide relative z-50">
-      <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto w-full">
-        <a href="#" className="max-sm:hidden">
+      <nav className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto w-full">
+        <NavLink to={'/'} className="max-sm:hidden">
           <img
             src="../../public/img/cdn-logo.svg"
             alt="logo"
             className="w-[134px]"
           />
-        </a>
-        <a href="#" className="hidden max-sm:block">
+        </NavLink>
+        <NavLink to={'/'} className="hidden max-sm:block">
           <img
             src="../../public/img/cdn-logo.svg"
             alt="logo"
             className="w-30"
           />
-        </a>
+        </NavLink>
         <div
+          ref={navMenuRef}
           id="collapseMenu"
           className="max-lg:hidden lg:!block max-lg:w-full max-lg:fixed max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50"
         >
           <button
             id="toggleClose"
             className="lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white w-9 h-9 flex items-center justify-center border border-gray-200 cursor-pointer"
+            onClick={onMenuButtonClick}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -43,53 +77,35 @@ export default function Header(): ReactElement {
           </button>
           <ul className="lg:flex lg:ml-14 lg:gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
             <li className="mb-6 hidden max-lg:block">
-              <a href="#">
+              <NavLink to={'/'}>
                 <img
-                  src="https://readymadeui.com/readymadeui.svg"
+                  src="../../public/img/cdn-logo.svg"
                   alt="logo"
                   className="w-36"
                 />
-              </a>
+              </NavLink>
             </li>
             <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-              <a
-                href="#"
-                className="font-medium lg:hover:text-blue-700 text-blue-700 block text-[15px]"
+              <NavLink
+                to={'/'}
+                className="font-medium lg:hover:text-blue-700 block text-[15px]"
+                style={({ isActive }) => ({
+                  color: isActive ? 'blue' : 'black',
+                })}
               >
-                Home
-              </a>
+                Intro
+              </NavLink>
             </li>
             <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-              <a
-                href="#"
-                className="font-medium lg:hover:text-blue-700 text-slate-900 block text-[15px]"
+              <NavLink
+                to={'/libraries'}
+                className="font-medium lg:hover:text-blue-700 block text-[15px]"
+                style={({ isActive }) => ({
+                  color: isActive ? 'blue' : 'black',
+                })}
               >
-                Team
-              </a>
-            </li>
-            <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-              <a
-                href="#"
-                className="font-medium lg:hover:text-blue-700 text-slate-900 block text-[15px]"
-              >
-                Feature
-              </a>
-            </li>
-            <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-              <a
-                href="#"
-                className="font-medium lg:hover:text-blue-700 text-slate-900 block text-[15px]"
-              >
-                Blog
-              </a>
-            </li>
-            <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-              <a
-                href="#"
-                className="font-medium lg:hover:text-blue-700 text-slate-900 block text-[15px]"
-              >
-                About
-              </a>
+                All Libraries
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -109,7 +125,11 @@ export default function Header(): ReactElement {
               <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z"></path>
             </svg>
           </div>
-          <button id="toggleOpen" className="lg:hidden cursor-pointer">
+          <button
+            id="toggleOpen"
+            className="lg:hidden cursor-pointer"
+            onClick={onMenuButtonClick}
+          >
             <svg
               className="w-7 h-7"
               fill="#000"
@@ -122,9 +142,11 @@ export default function Header(): ReactElement {
                 clipRule="evenodd"
               />
             </svg>
+
+            <span className="visually-hidden">open navigation menu</span>
           </button>
         </div>
-      </div>
+      </nav>
     </header>
   );
 }
