@@ -2,7 +2,6 @@ import { useState, type ReactElement } from 'react';
 import LibrariesList from '../components/libraries-list';
 import type { Libraries } from '../types/types';
 import { useLibraries } from '../hooks/hooks';
-import Filter from '../components/filter';
 import Pagination from '../components/pagination';
 import {
   LIBRARIES_TO_SHOW_COUNT,
@@ -30,8 +29,6 @@ export default function Libraries(): ReactElement {
 
   return (
     <>
-      <Filter />
-
       <LibrariesList libraries={data} currentPage={currentPage} />
 
       <Pagination

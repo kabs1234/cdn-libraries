@@ -38,18 +38,10 @@ export default function Header(): ReactElement {
     <header className="flex border-b border-gray-300 py-3 px-4 sm:px-10 bg-white min-h-[65px] tracking-wide relative z-50">
       <nav className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto w-full">
         <NavLink to={'/'} className="max-sm:hidden">
-          <img
-            src="../../public/img/cdn-logo.svg"
-            alt="logo"
-            className="w-[134px]"
-          />
+          <img src="img/cdn-logo.svg" alt="logo" className="w-[134px]" />
         </NavLink>
         <NavLink to={'/'} className="hidden max-sm:block">
-          <img
-            src="../../public/img/cdn-logo.svg"
-            alt="logo"
-            className="w-30"
-          />
+          <img src="img/cdn-logo.svg" alt="logo" className="w-30" />
         </NavLink>
         <div
           ref={navMenuRef}
@@ -79,11 +71,7 @@ export default function Header(): ReactElement {
           <ul className="lg:flex lg:ml-14 lg:gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
             <li className="mb-6 hidden max-lg:block">
               <NavLink to={'/'}>
-                <img
-                  src="../../public/img/cdn-logo.svg"
-                  alt="logo"
-                  className="w-36"
-                />
+                <img src="img/cdn-logo.svg" alt="logo" className="w-36" />
               </NavLink>
             </li>
             <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">

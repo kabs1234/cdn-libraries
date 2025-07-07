@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      gcTime: 0,
+      gcTime: 300000,
     },
   },
 });
@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename="/cdn-libraries">
         <App />
       </BrowserRouter>
     </QueryClientProvider>
