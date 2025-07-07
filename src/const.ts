@@ -1,1 +1,5 @@
-export const FIRST_SHOWN_LIBRARIES_COUNT = 6;
+export const PAGINATION_PAGE_DEFAULT_COUNT = 1;
+
+export const LIBRARIES_TO_SHOW_COUNT = 6;
+
+export const PAGINATION_SIBLINGS_COUNT = 1;

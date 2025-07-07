@@ -1,46 +1,88 @@
+import classnames from 'classnames';
+import { DOTS, usePagination } from '../hooks/use-pagination';
 import type { ReactElement } from 'react';
 
-export default function Pagination(): ReactElement {
+type Pagination = {
+  className: string;
+  currentPage: number;
+  totalCount: number;
+  siblingCount: number;
+  pageSize: number;
+  onPageChange: (page: number) => void;
+};
+
+export default function Pagination(props: Pagination): ReactElement {
+  const {
+    onPageChange,
+    totalCount,
+    siblingCount = 1,
+    currentPage,
+    pageSize,
+    className,
+  } = props;
+
+  const paginationRange = usePagination({
+    currentPage,
+    totalCount,
+    siblingCount,
+    pageSize,
+  });
+
+  if (currentPage === 0 || paginationRange.length < 2) {
+    return <p>Please set paginatination settings right</p>;
+  }
+
+  const onNext = () => {
+    onPageChange(currentPage + 1);
+  };
+
+  const onPrevious = () => {
+    onPageChange(currentPage - 1);
+  };
+
+  const lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <ul className="flex justify-center mt-8">
-      <li className="flex items-center justify-center shrink-0 bg-gray-100 w-9 h-9 rounded-md">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-3 fill-gray-300"
-          viewBox="0 0 55.753 55.753"
-        >
-          <path
-            d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
-            data-original="#000000"
-          />
-        </svg>
+    <ul
+      className={classnames('pagination-container', { [className]: className })}
+    >
+      <li
+        key="pagination-prev"
+        className={classnames('pagination-item', {
+          disabled: currentPage === 1,
+        })}
+        onClick={onPrevious}
+      >
+        <div className="arrow left" />
       </li>
-      <li className="flex items-center justify-center shrink-0 cursor-pointer text-base font-medium text-slate-900 px-[13px] h-9 rounded-md bg-blue-100">
-        1
-      </li>
-      <li className="flex items-center justify-center shrink-0 cursor-pointer text-base font-medium text-slate-900 px-[13px] h-9 rounded-md">
-        2
-      </li>
-      <li className="flex items-center justify-center shrink-0 cursor-pointer text-base font-medium text-slate-900 px-[13px] h-9 rounded-md">
-        3
-      </li>
-      <li className="flex items-center justify-center shrink-0 cursor-pointer text-base font-medium text-slate-900 px-[13px] h-9 rounded-md">
-        ...
-      </li>
-      <li className="flex items-center justify-center shrink-0 cursor-pointer text-base font-medium text-slate-900 px-[13px] h-9 rounded-md">
-        30
-      </li>
-      <li className="flex items-center justify-center shrink-0 cursor-pointer bg-gray-200 w-9 h-9 rounded-md">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-3 fill-gray-500 rotate-180"
-          viewBox="0 0 55.753 55.753"
-        >
-          <path
-            d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
-            data-original="#000000"
-          />
-        </svg>
+      {paginationRange.map((pageNumber, index) => {
+        if (pageNumber === DOTS || typeof pageNumber === 'string') {
+          return (
+            <li key={`dots-${index}`} className="pagination-item dots">
+              &#8230;
+            </li>
+          );
+        }
+
+        return (
+          <li
+            key={`page-${pageNumber}`}
+            className={classnames('pagination-item', {
+              selected: pageNumber === currentPage,
+            })}
+            onClick={() => onPageChange(pageNumber)}
+          >
+            {pageNumber}
+          </li>
+        );
+      })}
+      <li
+        key="pagination-next"
+        className={classnames('pagination-item', {
+          disabled: currentPage === lastPage,
+        })}
+        onClick={onNext}
+      >
+        <div className="arrow right" />
       </li>
     </ul>
   );
