@@ -2,6 +2,8 @@ import type { ReactElement } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import type { LibraryInfo } from '../types/types';
 import { useLibraryInfo } from '../hooks/hooks';
+import Loading from '../components/loading';
+import ErrorComponent from '../components/error';
 
 type LibraryParams = {
   libraryName: string;
@@ -17,11 +19,16 @@ export default function LibraryInfo(): ReactElement {
   };
 
   if (isPending) {
-    return <p>Loading ...</p>;
+    return <Loading />;
   }
 
   if (error) {
-    return <p>Error happened! Try to refresh the page</p>;
+    return (
+      <ErrorComponent
+        title="Library not found"
+        message="The requested library doesn’t exist. Verify the name or try another search."
+      />
+    );
   }
 
   return (

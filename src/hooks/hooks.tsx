@@ -16,6 +16,7 @@ export const useLibraryInfo = (libraryName: string) => {
   return useQuery({
     queryKey: ['libraryInfo', libraryName],
     queryFn: () => fetchLibraryInfo(libraryName),
+    retry: false,
   });
 };
 

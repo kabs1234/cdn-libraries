@@ -4,6 +4,8 @@ import { useLibraries } from '../hooks/hooks';
 import Pagination from '../components/pagination';
 import { LIBRARIES_TO_SHOW_COUNT, PAGINATION_SIBLINGS_COUNT } from '../const';
 import { useParams } from 'react-router';
+import Loading from '../components/loading';
+import ErrorComponent from '../components/error';
 
 export default function LibrariesPage(): ReactElement {
   const { pageNumber } = useParams();
@@ -11,11 +13,11 @@ export default function LibrariesPage(): ReactElement {
   const [currentPage, setCurrentPage] = useState<number>(Number(pageNumber));
 
   if (isPending) {
-    return <p>Loading ...</p>;
+    return <Loading />;
   }
 
   if (error) {
-    return <p>Error happened! Try to refresh the page</p>;
+    return <ErrorComponent />;
   }
 
   const onPageChange = (page: number): void => {

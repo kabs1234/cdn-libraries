@@ -8,6 +8,8 @@ import {
   PAGINATION_PAGE_DEFAULT_COUNT,
   PAGINATION_SIBLINGS_COUNT,
 } from '../const';
+import Loading from '../components/loading';
+import ErrorComponent from '../components/error';
 
 export default function Libraries(): ReactElement {
   const { isPending, error, data } = useLibraries();
@@ -16,11 +18,11 @@ export default function Libraries(): ReactElement {
   );
 
   if (isPending) {
-    return <p>Loading ...</p>;
+    return <Loading />;
   }
 
   if (error) {
-    return <p>Error happened! Try to refresh the page</p>;
+    return <ErrorComponent />;
   }
 
   const onPageChange = (page: number): void => {

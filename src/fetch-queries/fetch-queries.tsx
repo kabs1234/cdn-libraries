@@ -1,14 +1,37 @@
 import type { Libraries, LibraryInfo } from '../types/types';
 
-export const fetchLibraries = (): Promise<Libraries> =>
-  fetch('https://api.cdnjs.com/libraries').then((res) => res.json());
+export const fetchLibraries = async (): Promise<Libraries> => {
+  const response = await fetch('https://api.cdnjs.com/libraries');
 
-export const fetchLibraryInfo = (libraryName: string): Promise<LibraryInfo> =>
-  fetch(
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  return response.json();
+};
+
+export const fetchLibraryInfo = async (
+  libraryName: string
+): Promise<LibraryInfo> => {
+  const response = await fetch(
     `https://api.cdnjs.com/libraries/${libraryName}?fields=name,latest,sri,authors,autoupdate,description,filename,homepage,keywords,license,repository,version,author`
-  ).then((response) => response.json());
-
-export const searchLibraries = (query: string): Promise<Libraries> =>
-  fetch(`https://api.cdnjs.com/libraries?search=${query}`).then((response) =>
-    response.json()
   );
+
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  return response.json();
+};
+
+export const searchLibraries = async (query: string): Promise<Libraries> => {
+  const response = await fetch(
+    `https://api.cdnjs.com/libraries?search=${query}`
+  );
+
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  return response.json();
+};
