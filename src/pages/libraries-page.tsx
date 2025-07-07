@@ -1,0 +1,42 @@
+import { useState, type ReactElement } from 'react';
+import LibrariesList from '../components/libraries-list';
+import { useLibraries } from '../hooks/hooks';
+import Filter from '../components/filter';
+import Pagination from '../components/pagination';
+import { LIBRARIES_TO_SHOW_COUNT, PAGINATION_SIBLINGS_COUNT } from '../const';
+import { useParams } from 'react-router';
+
+export default function LibrariesPage(): ReactElement {
+  const { pageNumber } = useParams();
+  const { isPending, error, data } = useLibraries();
+  const [currentPage, setCurrentPage] = useState<number>(Number(pageNumber));
+
+  if (isPending) {
+    return <p>Loading ...</p>;
+  }
+
+  if (error) {
+    return <p>Error happened! Try to refresh the page</p>;
+  }
+
+  const onPageChange = (page: number): void => {
+    setCurrentPage(page);
+  };
+
+  return (
+    <>
+      <Filter />
+
+      <LibrariesList libraries={data} currentPage={currentPage} />
+
+      <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        siblingCount={PAGINATION_SIBLINGS_COUNT}
+        pageSize={LIBRARIES_TO_SHOW_COUNT}
+        totalCount={data.available}
+        onPageChange={onPageChange}
+      />
+    </>
+  );
+}

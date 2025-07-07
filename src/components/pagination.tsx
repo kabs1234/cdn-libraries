@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import { DOTS, usePagination } from '../hooks/use-pagination';
 import type { ReactElement } from 'react';
+import { useNavigate } from 'react-router';
 
 type Pagination = {
   className: string;
@@ -12,6 +13,8 @@ type Pagination = {
 };
 
 export default function Pagination(props: Pagination): ReactElement {
+  const navigate = useNavigate();
+
   const {
     onPageChange,
     totalCount,
@@ -34,10 +37,12 @@ export default function Pagination(props: Pagination): ReactElement {
 
   const onNext = () => {
     onPageChange(currentPage + 1);
+    navigate(`/libraries/page/${currentPage + 1}`);
   };
 
   const onPrevious = () => {
     onPageChange(currentPage - 1);
+    navigate(`/libraries/page/${currentPage - 1}`);
   };
 
   const lastPage = paginationRange[paginationRange.length - 1];
@@ -69,7 +74,10 @@ export default function Pagination(props: Pagination): ReactElement {
             className={classnames('pagination-item', {
               selected: pageNumber === currentPage,
             })}
-            onClick={() => onPageChange(pageNumber)}
+            onClick={() => {
+              onPageChange(pageNumber);
+              navigate(`/libraries/page/${pageNumber}`);
+            }}
           >
             {pageNumber}
           </li>
