@@ -45,7 +45,7 @@ export default function Pagination(props: Pagination): ReactElement {
     <ul
       className={classnames('pagination-container', { [className]: className })}
     >
-      <li
+      <button
         key="pagination-prev"
         className={classnames('pagination-item', {
           disabled: currentPage === 1,
@@ -53,7 +53,7 @@ export default function Pagination(props: Pagination): ReactElement {
         onClick={onPrevious}
       >
         <div className="arrow left" />
-      </li>
+      </button>
       {paginationRange.map((pageNumber, index) => {
         if (pageNumber === DOTS || typeof pageNumber === 'string') {
           return (
@@ -75,7 +75,7 @@ export default function Pagination(props: Pagination): ReactElement {
           </li>
         );
       })}
-      <li
+      <button
         key="pagination-next"
         className={classnames('pagination-item', {
           disabled: currentPage === lastPage,
@@ -83,7 +83,7 @@ export default function Pagination(props: Pagination): ReactElement {
         onClick={onNext}
       >
         <div className="arrow right" />
-      </li>
+      </button>
     </ul>
   );
 }
