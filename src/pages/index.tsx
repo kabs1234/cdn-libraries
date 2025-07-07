@@ -135,7 +135,7 @@ export default function IndexPage(): ReactElement {
                 <div className="flex-shrink-0 bg-white p-1 sm:p-2 rounded-md">
                   <img
                     className="h-8 sm:h-10 md:h-12"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                    src="img/react-logo.svg"
                     alt="React"
                   />
                 </div>
@@ -152,13 +152,47 @@ export default function IndexPage(): ReactElement {
                 <div className="flex-shrink-0 bg-white p-1 sm:p-2 rounded-md">
                   <img
                     className="h-8 sm:h-10 md:h-12"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                    src="img/typescript-logo.svg"
                     alt="TypeScript"
                   />
                 </div>
                 <div className="ml-2 sm:ml-3">
                   <p className="text-xs sm:text-sm font-medium text-gray-900">
                     TypeScript
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-span-1 flex justify-center">
+              <div className="flex items-center">
+                <div className="flex-shrink-0 bg-white p-1 sm:p-2 rounded-md">
+                  <img
+                    className="h-8 sm:h-10 md:h-12"
+                    src="img/react-query-logo.svg"
+                    alt="TanStack Query"
+                  />
+                </div>
+                <div className="ml-2 sm:ml-3">
+                  <p className="text-xs sm:text-sm font-medium text-gray-900">
+                    TanStack Query
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-span-1 flex justify-center">
+              <div className="flex items-center">
+                <div className="flex-shrink-0 bg-white p-1 sm:p-2 rounded-md">
+                  <img
+                    className="h-8 sm:h-10 md:h-12"
+                    src="img/tailwind-css-logo.svg"
+                    alt="Tailwind CSS"
+                  />
+                </div>
+                <div className="ml-2 sm:ml-3">
+                  <p className="text-xs sm:text-sm font-medium text-gray-900">
+                    Tailwind CSS
                   </p>
                 </div>
               </div>

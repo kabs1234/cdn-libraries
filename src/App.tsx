@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router';
 import Libraries from './pages/libraries';
-import LibraryInfo from './components/library-full-info';
+import LibraryInfo from './pages/library-full-info';
 import ErrorPage from './pages/error';
 import IndexPage from './pages';
 import Layout from './components/layout';
